@@ -148,7 +148,7 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	tracer := h.tracer
 
 	if tracer == nil {
-		if span := trace.SpanFromContext(r.Context()); span.SpanContext().IsValid() {
+		if span := trace.SpanFromContext(ctx); span.SpanContext().IsValid() {
 			tracer = newTracer(span.TracerProvider())
 		} else {
 			tracer = newTracer(otel.GetTracerProvider())
